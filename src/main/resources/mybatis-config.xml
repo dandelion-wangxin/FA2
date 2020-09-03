@@ -5,7 +5,7 @@
 <configuration>
 
     <settings>
-        <!--开启Mybatis支持延迟加载-->
+        <!--开启Mybatis支持延迟加载hello-->
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"></setting>
         <!--开启支持二级缓存-->
