@@ -1,0 +1,7 @@
+.layui-btn {
+    border-radius: 10px !important;
+}
+#search-header .layui-input-inline{
+	margin-right:0;
+	width: 192px;
+}

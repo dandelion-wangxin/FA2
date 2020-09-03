@@ -1,0 +1,109 @@
+/* 设置layui下拉框的最大长度，一条数据占36px * 显示数量，加12px */
+.layui-form-select dl {
+	max-height:228px;
+}
+/* 让超出的下拉框不会被弹出层覆盖 慎用！慎用！慎用！ */
+/* body .layui-layer-page .layui-layer-content {
+	overflow: visible;
+} */
+/** 弹出的表单模态框样式 */
+.popFormModal{
+	display:none;
+	padding:20px 50px 20px 50px;
+}
+/** 搜索头的样式 */
+#search-header{
+	padding-top: 10px;/*修改过*/
+	height: auto;
+	background: rgb(250,250,250);
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #ddd;
+	transition: all 0.2s;
+	z-index: 999;
+}
+#search-header .layui-inline{
+	margin-right:0;
+}
+#search-header .layui-input-inline{
+	margin-right:0;
+	width: 192px;
+}
+
+
+/*  */
+body {
+	background: rgb(255,255,255);
+}
+#content {
+	width: 98%;
+	margin: 10px auto 0px;
+}
+#dataTable {
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #ddd;
+	background: #eee;
+	transition: all 0.2s;
+}
+.layui-table-view {
+    margin: 0px 0 !important;
+}
+#search-header:hover {
+	box-shadow: 0px 0px 15px #ccc;
+}
+#dataTable:hover {
+	box-shadow: 0px 0px 15px #ccc;
+}
+/*layui按钮圆角*/
+.layui-btn {
+    border-radius: 10px !important;
+}
+/*layui弹框圆角*/
+.layui-layer {
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+/*layui弹框按钮圆角*/
+.layui-layer-btn a {
+    border-radius: 20px !important;
+}
+/*背景颜色*/
+.my-bg-blue {
+	background-color: rgb(28,132,198) !important;
+}
+.my-bg-red {
+	background-color: #FF0018B8 !important;
+}
+.my-bg-pink {
+	background-color: rgb(245,156,166) !important;
+}
+.my-bg-gray {
+	background-color: #393D49B3 !important;
+}
+.my-bg-green {
+	background-color: rgb(26,179,148) !important;
+}
+.my-bg-green1 {
+	background-color: rgb(108,217,195) !important;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+    background-color: #5FB878 !important;
+}
+.font-color {
+	color: #FFFFFF !important;
+}
+.font-size {
+	color: 12px !important;
+}
+.useable {
+	line-height: 20px !important;
+	display: inline-flex;
+	padding: 0px 10px;
+	border-radius: 10px;
+}
+/* 解决图片展示表格框样式问题，如显示不完整，优先级等...*/
+.layui-table-cell {
+	text-align: center;
+	height: auto;
+	white-space: normal;
+}

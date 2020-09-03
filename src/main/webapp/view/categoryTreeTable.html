@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商品分类管理</title>
+		<!-- 项目基准路径 -->
+		<!--<base href="/x-admin/" />-->
+		<!-- 引入layui的css -->
+		<link rel="stylesheet" href="../UI/layui/css/layui.css" media="all">
+		<!-- 引入资源css -->
+		<link rel="stylesheet" href="../css/category/categoryTreeTable.css" media="all">
+		<!-- 引入美化css -->
+		<link rel="stylesheet" href="../css/util/util.css" media="all">
+		<!-- 引入jqeury -->
+		<!--<script src="static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<!-- 引入layui的js -->
+		<script src="../UI/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 引入拼音工具js -->
+		<script src="lib/ChinesePY.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 引入资源js -->
+		<script src="js/category/categoryTreeTable1.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 引入按钮权限控制js -->
+		<!--<script src="static/js/system/power/authorityControl.js" type="text/javascript" charset="utf-8"></script>-->
+	</head>
+
+	<body>
+		<!--  页面内容区-->
+		<div id="content">
+			<!-- 头部搜索框 -->
+			<div id="search-header">
+				<form class="layui-form">
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 70px">搜索分类：</label>
+							<div class="layui-input-inline">
+								<input type="text" name="keyword" style="width: 300px" placeholder="请输入搜索关键字" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline" style="padding-left: 120px;">
+							<button id="categorySearchBtn" class="layui-btn layui-btn-primary" lay-submit="" lay-filter="categorySearchBtn">
+				            	<i class="layui-icon layui-icon-search"></i>
+				            	查询
+		            		</button>
+							<button id="searchReset" class="layui-btn layui-btn-primary" type="reset">
+				            	<i class="layui-icon layui-icon-refresh-3"></i>
+				            	重置
+				            </button>
+							<button id="unfoldAll" class="layui-btn layui-btn-primary" type="button">
+				            	<i class="layui-icon layui-icon-triangle-d"></i>
+				            	展开
+				            </button>
+							<button id="foldAll" class="layui-btn layui-btn-primary" type="button">
+				            	<i class="layui-icon layui-icon-triangle-r"></i>
+				            	折叠
+				            </button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- 美化样式 -->
+			<div id="dataDiv">
+				<!-- 数据表格头部工具栏 -->
+				<div class="layui-table-tool mylayui-table-header-tool">
+					<div class="layui-table-tool-temp">
+						<div class="layui-btn-container">
+							<span class="btnCont" style="">
+			    				<button title="添加" class="toolbar layui-btn layui-btn-sm"><i class="layui-icon">&#xe654;</i>添加</button>
+			    				<button title="修改" class="toolbar layui-btn layui-btn-warm layui-btn-sm"><i class="layui-icon">&#xe642;</i>修改</button>
+			    				<button title="删除" class="toolbar layui-btn layui-btn-danger layui-btn-sm"><i class="layui-icon">&#xe640;</i>禁用</button>
+			    				<button title="恢复" class="toolbar layui-btn layui-btn-normal layui-btn-sm"><i class="layui-icon">&#xe669;</i>恢复</button>
+		    				</span>
+						</div>
+					</div>
+				</div>
+				<!-- 数据表格 -->
+				<table class="layui-hide" id="categoryTable" lay-filter="resourceTableEvent">
+				</table>
+			</div>
+
+
+		</div>
+	</body>
+	<!--                                                -->
+	<!-- 添加模态框 -->
+	<div id="addCategoryModal" class="popFormModal">
+		<!-- 这里手动加表单样式 -->
+		<form id="addCategoryForm" lay-filter="addCategoryForm" class="layui-form layui-form-pane">
+			<!-- 隐藏域 -->
+			<input type="hidden" name="parentId" value="" />
+			<input type="hidden" name="categoryIndex" value="" />
+			<input type="hidden" name="useable" value="" />
+			<!-- -->
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类名</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryName" lay-verify="required" lay-verType="tips" placeholder="请输入分类名" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">父分类</label>
+				<div class="layui-input-block">
+					<input type="text" name="parentName" disabled="disabled" lay-verify="required" placeholder="请选择父分类" autocomplete="off" class="layui-input ban">
+					<i title="点我" id="searchParentCategory" class="layui-icon searchParentCategory">&#xe615;</i>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类等级</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryLevel" disabled="disabled" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ban">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类序号</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryIndex" disabled="disabled" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ban">
+				</div>
+			</div>
+
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">分类描述</label>
+				<div class="layui-input-block">
+					<textarea name="description" placeholder="请输入分类描述" class="layui-textarea"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block" style="text-align: right;">
+					<button class="layui-btn" type="submit" lay-filter="addCategoryBtn" lay-submit>立即提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 修改模态框 -->
+	<div id="updateCategoryModal" class="popFormModal">
+		<!-- 这里手动加表单样式 -->
+		<form id="updateCategoryForm" lay-filter="updateCategoryForm" class="layui-form layui-form-pane" action="">
+			<!-- 隐藏域 -->
+			<input type="hidden" name="categoryId" value="" />
+			<input type="hidden" name="_method" value="PUT" />
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类名</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryName" lay-verify="required" placeholder="请输入分类名" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">父分类</label>
+				<div class="layui-input-block">
+					<input type="text" name="parentName" disabled="disabled" lay-verify="required" placeholder="请选择父分类" autocomplete="off" class="layui-input ban">
+					<i title="点我" id="searchParentCategory" class="layui-icon searchParentCategory">&#xe615;</i>
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类等级</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryLevel" disabled="disabled" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ban">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类序号</label>
+				<div class="layui-input-block">
+					<input type="text" name="categoryIndex" disabled="disabled" lay-verify="required" placeholder="" autocomplete="off" class="layui-input ban">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">分类描述</label>
+				<div class="layui-input-block">
+					<textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block" style="text-align: right;">
+					<button class="layui-btn" type="submit" lay-filter="updateCategoryBtn" lay-submit>立即提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 资源树模态框 -->
+	<div id="categoryTreeModal" class="popFormModal">
+		<!-- 树形资源组件 -->
+		<div id="categoryTree"></div>
+	</div>
+
+</html>

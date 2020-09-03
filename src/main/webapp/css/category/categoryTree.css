@@ -1,0 +1,85 @@
+/* 设置layui下拉框的最大长度，一条数据占36px * 显示数量，加12px */
+.layui-form-select dl {
+	max-height:228px;
+}
+/* 让超出的下拉框不会被弹出层覆盖 慎用！慎用！慎用！ */
+/* body .layui-layer-page .layui-layer-content {
+	overflow: visible;
+} */
+/** 弹出的表单样式 */
+.definedModal{
+	display:none;
+	padding-top:10px;
+	padding-right:42px;
+}
+/** 搜索头的样式 */
+#search-header{
+	padding-top: 15px;
+	height: auto;
+}
+#search-header .layui-inline{
+	margin-right:0;
+}
+#search-header .layui-input-inline{
+	margin-right:0;
+	width: 192px;
+}
+
+/* 数据表格的外边距全部清空 */
+body .layui-table, .layui-table-view {
+    margin: 0px 0px 0px 0px;
+}
+
+body .resource-layui-table-tool{
+	min-height: 0px;
+	border-width: 1px 1px 0px 1px;
+	padding: 0px;
+	width: calc(100% - 2px);
+}
+
+body .resource-layui-table-tool .layui-table-tool-temp{
+	padding: 10px 15px;
+}
+
+#searchParentResource{
+	cursor: pointer;
+}
+
+.ban{
+	cursor: not-allowed;
+}
+
+#searchParentResource{
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	color: #777;
+	font-size: 24px;
+}
+
+/** 资源页面的树形表格样式 */
+.layui-tree {
+	margin: 10px;
+}
+
+#resourceTree {
+	width: 258px;
+	height: 300px;
+	overflow: auto;
+	border-width: 1px;
+	border-style: solid;
+	border-color:#e6e6e6;
+	margin: 10px;
+}
+#resourceTreeModeal .operation{
+	text-align: right;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+#dataDiv .ew-tree-table {
+	margin: 0px;
+}
+
+
