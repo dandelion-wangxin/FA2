@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 1.配置整合mybatis过程-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!-- 2.创建数据连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+
+        <!--c3p0的私有属性-->
+        <property name="maxPoolSize" value="30"></property>
+        <property name="minPoolSize" value="10"></property>
+        <!--关闭链接后不自动commit-->
+        <property name="autoCommitOnClose" value="false"></property>
+        <!--获取链接超时时间-->
+        <property name="checkoutTimeout" value="10000"></property>
+        <!--当获取连接失败重试次数-->
+        <property name="acquireRetryAttempts" value="2"></property>
+    </bean>
+
+    <!-- 3.配置sqlSessionFactory对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据库连接池-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--配置mybatis全局配置文件：mybatis-config.xml-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!--扫描entity包使用别名-->
+        <property name="typeAliasesPackage" value="com.yidu.fund"></property>
+        <!--扫描sql配置文件：mapper需要的xml文件-->
+        <property name="mapperLocations" value="classpath:mapper/**/*.xml"></property>
+        <!--配置分页查询插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        &lt;!&ndash;注入sqlSessionFactory&ndash;&gt;
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        &lt;!&ndash;给出需要扫描的dao接口&ndash;&gt;
+        <property name="basePackage" value="com.yidu"></property>
+    </bean>-->
+    <!--在mapper文件夹下单独配置需要扫描的包-->
+
+
+
+
+</beans>
